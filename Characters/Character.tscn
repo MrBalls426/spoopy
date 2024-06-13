@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7ofka1mj2b16"]
 
-[ext_resource type="Script" path="res://character.gd" id="1_uij3v"]
-[ext_resource type="Script" path="res://CameraPivot.gd" id="2_qnm0y"]
+[ext_resource type="Script" path="res://Characters/character.gd" id="1_uij3v"]
+[ext_resource type="Script" path="res://Characters/CameraPivot.gd" id="2_qnm0y"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mvm66"]
 
