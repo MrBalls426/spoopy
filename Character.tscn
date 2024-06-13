@@ -16,5 +16,11 @@ mesh = SubResource("CapsuleMesh_mvm66")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_tyqxd")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.977482, 0.211018, 0, -0.211018, 0.977482, 0, 1.77678, 2)
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 1.84478e-08, -8.54542e-08, 0, 0.977482, 0.211018, 8.74228e-08, 0.211018, -0.977482, 1.08307, 1.87437, -1.9593)
+fov = 90.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/Camera3D"]
+remote_path = NodePath("..")

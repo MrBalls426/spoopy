@@ -20,13 +20,13 @@ tonemap_mode = 2
 environment = SubResource("Environment_ooo8o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 3.60721, 0)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 5.03217, 0)
 shadow_enabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30388, 0.300828, 16.8099)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99379, 0.300828, 16.8099)
 use_collision = true
-size = Vector3(18.615, 0.243652, 44.4385)
+size = Vector3(35.2103, 0.243652, 44.4385)
 
 [node name="Character" parent="." instance=ExtResource("1_1wcuq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42265, 0)
