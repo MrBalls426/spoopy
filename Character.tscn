@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://7ofka1mj2b16"]
+[gd_scene load_steps=5 format=3 uid="uid://dm8uda10jdhii"]
 
-[ext_resource type="Script" path="res://Characters/character.gd" id="1_uij3v"]
-[ext_resource type="Script" path="res://Characters/CameraPivot.gd" id="2_qnm0y"]
+[ext_resource type="Script" path="res://Characters/CameraPivot.gd" id="1_dohck"]
+[ext_resource type="Script" path="res://Characters/character.gd" id="2_72pms"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mvm66"]
 
@@ -11,21 +11,20 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
-script = ExtResource("2_qnm0y")
+script = ExtResource("1_dohck")
 camera = NodePath("Camera3D")
 Drone_position = Vector3(0, 2, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 1.84478e-08, -8.54542e-08, 0, 0.977482, 0.211018, 8.74228e-08, 0.211018, -0.977482, 0, 0, 0)
 fov = 90.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/Camera3D"]
 remote_path = NodePath("..")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-script = ExtResource("1_uij3v")
+script = ExtResource("2_72pms")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("CapsuleMesh_mvm66")

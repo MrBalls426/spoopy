@@ -3,6 +3,10 @@ extends Node3D
 @export var camera: Node3D 
 @export var Drone_position: Vector3
 @export var camera_speed := 5.0
+@export var horizontalSensitivity : float = 0.002
+@export var verticalSensitivity : float = 0.002
+@export var minPitchDeg : float = -45
+@export var maxPitchDeg : float = 45
 
 @onready var character_body_3d: CharacterBody3D = $"../CharacterBody3D"
 
@@ -16,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	handle_camera_position(delta)
 
 func handle_camera_position(penis: float) -> void:
-	global_position = lerp(global_position, character_body_3d.global_position + Drone_position, penis * camera_speed)
+	global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y), penis * camera_speed)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
