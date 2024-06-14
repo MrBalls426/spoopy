@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgmrc616coos6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ianu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pm6rk"]
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 2
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4ianu")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+hit_from_inside = true
+debug_shape_custom_color = Color(0.672457, 0.672457, 0.672457, 1)
+
+[node name="Roar" type="AudioStreamPlayer3D" parent="."]
+max_distance = 300.0
+doppler_tracking = 2
+
+[node name="player_detection_timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_pm6rk")
+skeleton = NodePath("../CollisionShape3D")
+
+[connection signal="timeout" from="player_detection_timer" to="." method="_on_player_detection_timer_timeout"]
