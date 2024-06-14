@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	handle_camera_position(delta)
 
 func handle_camera_position(penis: float) -> void:
-	global_position = lerp(global_position, character_body_3d.global_position + Drone_position, penis * camera_speed)
+	global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP,rotation.y), penis * camera_speed)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
