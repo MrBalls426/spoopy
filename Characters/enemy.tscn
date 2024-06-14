@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://buocn2jh4p627"]
+[gd_scene load_steps=5 format=3 uid="uid://buocn2jh4p627"]
 
 [ext_resource type="Script" path="res://Characters/enemy.gd" id="1_y5nua"]
+[ext_resource type="AudioStream" uid="uid://1rci1lnrx826" path="res://assets/sounds/monster/monster_sound2.ogg" id="2_vwv86"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ianu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pm6rk"]
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast", "timer")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast", "timer", "roar")]
 collision_layer = 2
 script = ExtResource("1_y5nua")
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
 timer = NodePath("player_detection_timer")
+roar = NodePath("Roar")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
@@ -26,7 +28,9 @@ hit_from_inside = true
 debug_shape_custom_color = Color(0.672457, 0.672457, 0.672457, 1)
 
 [node name="Roar" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_vwv86")
 max_distance = 300.0
+max_polyphony = 2
 doppler_tracking = 2
 
 [node name="player_detection_timer" type="Timer" parent="."]

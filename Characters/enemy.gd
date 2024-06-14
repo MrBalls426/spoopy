@@ -14,6 +14,7 @@ enum SearchBehavior {LOCATE,FOUND}
 @export var nav_agent :NavigationAgent3D
 @export var ray_cast : RayCast3D
 @export var timer : Timer
+@export var roar: AudioStreamPlayer3D 
 
 
 #target stored globally to allow timer timeout function to have access to it
@@ -23,11 +24,11 @@ var target # player
 # play roar sound
 var found_player := false:
 	set(val):
+		# if player has only just been found 
+		if val and not found_player:
+			print(true)
+			roar.play()
 		found_player = val
-		if val:
-			print("player found")
-		else:
-			print("player lost")
 
 
 ## checks if target is within locate or max distance
@@ -54,6 +55,19 @@ func within_line_of_sight(target) :
 			if found_player:
 				found_player = false
 				timer.wait_time = locate_player_check_interval
+
+func try_roar():
+	#% 80% chance to roar every 10 seconds if within line of sight
+		if found_player:
+			if randi() % 5 > 1:
+				if not roar.playing:	
+					roar.play()
+	# 5% chance to roar every second if not within line of sight
+		else:
+			if randi() % 20 > 1:
+				if not roar.playing:	
+					roar.play()
+
 
 
 func _ready() -> void:
@@ -91,4 +105,5 @@ func _physics_process(delta: float) -> void:
 ## checks every second if player is spotted. If player spotted, wait 10 secs before checking if line of sight is broken
 func _on_player_detection_timer_timeout() -> void:
 	within_line_of_sight(target)
+	try_roar()
 	timer.start()
