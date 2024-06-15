@@ -7,19 +7,15 @@ var mouse_motion := Vector2.ZERO
 @export var drone_position: Vector3
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-var FreeCamToggle: bool
+var FreeCamToggle: bool = false
 
-func _ready() -> void:
-	pass
-	
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
 	var input_dir : Vector2
-	var direction := (transform.basis * Vector3(-input_dir.y, 0, -input_dir.x)).normalized()
-	if FreeCamToggle == false:
+	if !FreeCamToggle:
 		input_dir = Input.get_vector("forward", "back", "left", "right")
-	
+	var direction := (transform.basis * Vector3(-input_dir.y, 0, -input_dir.x)).normalized()
 		
 
 	if not is_on_floor():
@@ -46,7 +42,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("FreeCam"):
 		FreeCamToggle = !FreeCamToggle
 
-		
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			mouse_motion = -event.relative * 0.001

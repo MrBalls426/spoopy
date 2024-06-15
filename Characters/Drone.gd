@@ -1,5 +1,6 @@
 extends CharacterBody3D
-const speed = 4.0
+
+
 @export var camera: Node3D 
 @export var Drone_position: Vector3
 @export var camera_speed := 5.0
@@ -22,19 +23,28 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("fly_up"):
 		velocity.y += gravity * delta * 2
 		
-	if not FreeCamToggle:
-		handle_camera_position(delta)
-	else:
+	if FreeCamToggle:
 		handle_free_cam()
+		velocity.y -= gravity * delta
+	else:
+		handle_camera_position(delta)
 		
-	if not is_on_floor():
-		if velocity.y >= 0:
-			velocity.y -= gravity * delta
-		else:
-			velocity.y -= gravity * delta * fall_speed
+	
+
 
 func handle_camera_position(penis: float) -> void:
-	global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y), penis * camera_speed)
+	#global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y), penis * camera_speed)
+	var target = character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y)
+	var direction = global_position.direction_to(target)
+	#using move_towards for slow acceleration
+	velocity.x = lerp(velocity.x, direction.x * camera_speed, penis)
+	velocity.z = lerp(velocity.z, direction.z * camera_speed, penis)
+	velocity.y = lerp(velocity.y, direction.y * camera_speed / 2, penis)
+	move_and_slide()
+	## PHYSICSBODY3D AXIS LOCK LINEAR Y LATER
+
+		
+
 
 func handle_free_cam() -> void:
 	if FreeCamToggle == true:
@@ -43,11 +53,11 @@ func handle_free_cam() -> void:
 		var flight_path := (transform.basis * Vector3(-drone_direction.y, 0, -drone_direction.x)).normalized()
 		
 		if flight_path:
-			velocity.x = flight_path.x * speed
-			velocity.z = flight_path.z * speed
+			velocity.x = flight_path.x * camera_speed
+			velocity.z = flight_path.z * camera_speed
 		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
-			velocity.z = move_toward(velocity.z, 0, speed)
+			velocity.x = move_toward(velocity.x, 0, camera_speed)
+			velocity.z = move_toward(velocity.z, 0, camera_speed)
 		move_and_slide()
 
 func _input(event: InputEvent) -> void:
@@ -60,10 +70,9 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	if event.is_action_pressed("FreeCam"):
-		FreeCamToggle = true
+		FreeCamToggle = !FreeCamToggle
 		
-	if event.is_action_pressed("Drone_return"):
-		FreeCamToggle = false
+
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
 	camera.rotate_x(-mouse_motion.y)

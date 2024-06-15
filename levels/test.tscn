@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbombfx4asf5b"]
+[gd_scene load_steps=6 format=3 uid="uid://cbombfx4asf5b"]
 
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Character.tscn" id="1_bp6qi"]
 [ext_resource type="PackedScene" uid="uid://dlyoekgnwfchn" path="res://assets/level.tscn" id="2_cnmca"]
-[ext_resource type="PackedScene" uid="uid://buocn2jh4p627" path="res://Characters/enemy.tscn" id="3_2vuty"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhnqe"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -39,9 +38,6 @@ use_collision = true
 size = Vector3(35.2103, 0.243652, 44.4385)
 
 [node name="Character" parent="." instance=ExtResource("1_bp6qi")]
-transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, 9.72504, -3.1904)
+transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, 1.72504, -3.1904)
 
 [node name="level" parent="." instance=ExtResource("2_cnmca")]
-
-[node name="Enemy" parent="." instance=ExtResource("3_2vuty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30532, 6.6546, -18.1126)

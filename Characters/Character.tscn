@@ -17,7 +17,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Drone" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("2_qnm0y")
 camera = NodePath("Camera3D")
-Drone_position = Vector3(2, 1, -2)
+Drone_position = Vector3(0, 2, -3)
+camera_speed = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Drone"]
 shape = SubResource("BoxShape3D_cesb3")
