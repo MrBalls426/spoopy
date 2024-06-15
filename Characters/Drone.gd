@@ -5,24 +5,33 @@ const speed = 4.0
 @export var camera_speed := 5.0
 @export var horizontalSensitivity : float = 0.002
 @export var verticalSensitivity : float = 0.002
-@export var minPitchDeg : float = -45
-@export var maxPitchDeg : float = 45
+@export var fall_speed: float = 2.3
 
 @onready var character_body_3d: CharacterBody3D = $"../CharacterBody3D"
-@onready var camera_pivot: Node3D = $"."
 
 var mouse_motion := Vector2.ZERO
 var FreeCamToggle: bool
 var fly: float
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
+	
+	if Input.is_action_pressed("fly_up"):
+		velocity.y += gravity * delta * 2
+		
 	if not FreeCamToggle:
 		handle_camera_position(delta)
 	else:
 		handle_free_cam()
+		
+	if not is_on_floor():
+		if velocity.y >= 0:
+			velocity.y -= gravity * delta
+		else:
+			velocity.y -= gravity * delta * fall_speed
 
 func handle_camera_position(penis: float) -> void:
 	global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y), penis * camera_speed)
@@ -32,8 +41,6 @@ func handle_free_cam() -> void:
 		
 		var drone_direction := Input.get_vector("fly_forward", "fly_back", "fly_left", "fly_right")
 		var flight_path := (transform.basis * Vector3(-drone_direction.y, 0, -drone_direction.x)).normalized()
-		
-		
 		
 		if flight_path:
 			velocity.x = flight_path.x * speed
