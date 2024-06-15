@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://7ofka1mj2b16"]
+
+[ext_resource type="PackedScene" uid="uid://dq8r0gudh5cup" path="res://Characters/Player/PlayerCharacter/PlayerCharacter.tscn" id="1_x1ka2"]
+[ext_resource type="PackedScene" uid="uid://v7t2k63ul0ao" path="res://Characters/Player/Drone/drone.tscn" id="2_orrtt"]
+
+[node name="Player" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Drone" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("2_orrtt")]
+player_character = NodePath("../PlayerCharacter")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_x1ka2")]

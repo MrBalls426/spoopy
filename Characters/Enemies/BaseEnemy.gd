@@ -1,5 +1,15 @@
 extends CharacterBody3D
 
+
+## ENEMY BEHAVIOR IS AS FOLLOWS
+# ENEMY WILL SEARCH FOR PLAYER WITHIN MAX LOCATE DISTANCE
+# IF LINE OF SIGHT IS REQUIRED, WILL CHECK LINE OF SIGHT
+# IF PLAYER FOUND, PLAYER WILL NOT BE LOST UNLESS OUT OF RANGE
+# IF LINE OF SIGHT REQUIRED, AND IS LOST, PLAYER WILL BE LOST
+
+
+
+
 enum SearchBehavior {LOCATE,FOUND}
 
 @export_category("Enemy Data")
@@ -9,25 +19,20 @@ enum SearchBehavior {LOCATE,FOUND}
 ## seconds until raycast is performed to check if mosnter has line of sight of player
 @export var locate_player_check_interval := 1.0
 @export var lose_player_check_interval := 10.0
+@export var line_of_sight_required := true
 
 @export_category("Enemy Nodes")
 @export var nav_agent :NavigationAgent3D
 @export var ray_cast : RayCast3D
 @export var timer : Timer
-@export var roar: AudioStreamPlayer3D 
 
 
 #target stored globally to allow timer timeout function to have access to it
 var target # player 
 
-# if found, line of sight temporarily not required 
-# play roar sound
+
 var found_player := false:
 	set(val):
-		# if player has only just been found 
-		if val and not found_player:
-			print(true)
-			roar.play()
 		found_player = val
 
 
@@ -47,27 +52,20 @@ func within_range(search, target_position:Vector3) -> bool:
 ## checks if target is visible from raycast
 func within_line_of_sight(target) :
 	ray_cast.target_position = target.global_position- ray_cast.global_position
-	if ray_cast.is_colliding():
-		if ray_cast.get_collider().is_in_group("Player") and within_range(SearchBehavior.LOCATE,target.global_position) :
-			found_player = true
-			timer.wait_time = lose_player_check_interval
-		else:
-			if found_player:
-				found_player = false
-				timer.wait_time = locate_player_check_interval
-
-func try_roar():
-	#% 80% chance to roar every 10 seconds if within line of sight
+	if line_of_sight_required:
+		if ray_cast.is_colliding():
+			if ray_cast.get_collider().is_in_group("Player") and within_range(SearchBehavior.LOCATE,target.global_position) :
+				found_player = true
+				timer.wait_time = lose_player_check_interval
+			else:
+				if found_player:
+					found_player = false
+					timer.wait_time = locate_player_check_interval
+	else: 
 		if found_player:
-			if randi() % 5 > 1:
-				if not roar.playing:	
-					roar.play()
-	# 5% chance to roar every second if not within line of sight
+			found_player = within_range(SearchBehavior.FOUND,target.global_position)
 		else:
-			if randi() % 20 > 1:
-				if not roar.playing:	
-					roar.play()
-
+			found_player = within_range(SearchBehavior.LOCATE,target.global_position)
 
 
 func _ready() -> void:
@@ -105,5 +103,4 @@ func _physics_process(delta: float) -> void:
 ## checks every second if player is spotted. If player spotted, wait 10 secs before checking if line of sight is broken
 func _on_player_detection_timer_timeout() -> void:
 	within_line_of_sight(target)
-	try_roar()
 	timer.start()
