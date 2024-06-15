@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbombfx4asf5b"]
+[gd_scene load_steps=8 format=3 uid="uid://cbombfx4asf5b"]
 
-[ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Character.tscn" id="1_bp6qi"]
+[ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="1_bp6qi"]
 [ext_resource type="PackedScene" uid="uid://dlyoekgnwfchn" path="res://assets/level.tscn" id="2_cnmca"]
+[ext_resource type="PackedScene" uid="uid://e3o6e27sio63" path="res://Characters/Enemies/stalker/stalker.tscn" id="4_04frb"]
+[ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="4_uwf0v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhnqe"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -41,3 +43,11 @@ size = Vector3(35.2103, 0.243652, 44.4385)
 transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, 1.72504, -3.1904)
 
 [node name="level" parent="." instance=ExtResource("2_cnmca")]
+
+[node name="Enemy2" parent="." instance=ExtResource("4_uwf0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -1, 7)
+
+[node name="Stalker" parent="." instance=ExtResource("4_04frb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5448, -2.3454, -8.81073)
+collision_layer = 2
+collision_mask = 1

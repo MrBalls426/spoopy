@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq8r0gudh5cup"]
+
+[ext_resource type="Script" path="res://Characters/Player/PlayerCharacter/PlayerCharacter.gd" id="1_oprgt"]
+[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/health.tscn" id="2_xnays"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mvm66"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tyqxd"]
+
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_oprgt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_mvm66")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_tyqxd")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.5)
+light_energy = 1.177
+light_indirect_energy = 16.0
+spot_range = 4.80594
+spot_angle = 52.9576
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SpotLight3D"]
+light_energy = 9.408
+light_indirect_energy = 16.0
+spot_range = 4.80594
+spot_angle = 30.4065
+
+[node name="health" parent="." instance=ExtResource("2_xnays")]
