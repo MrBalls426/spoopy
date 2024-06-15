@@ -66,9 +66,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("fly_up") and free_cam_toggle:
 		velocity.y += gravity * delta * 2
 		
+	if Input.is_action_pressed("fly_down") and free_cam_toggle:
+		velocity.y -= gravity * delta * 2
+		
 	if free_cam_toggle:
 		handle_free_cam()
-		velocity.y -= gravity * delta
 	else:
 		handle_camera_position(delta)
 
