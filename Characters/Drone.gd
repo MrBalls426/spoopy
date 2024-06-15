@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-
+@export_category("Drone data")
 @export var camera: Node3D 
 @export var Drone_position: Vector3
 @export var camera_speed := 5.0
 @export var horizontalSensitivity : float = 0.002
 @export var verticalSensitivity : float = 0.002
 @export var fall_speed: float = 2.3
+@export var fly_speed: float = 5.0
 
 @onready var character_body_3d: CharacterBody3D = $"../CharacterBody3D"
 
@@ -21,28 +22,28 @@ func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
 	
 	if Input.is_action_pressed("fly_up"):
-		velocity.y += gravity * delta * 2
+		velocity.y += fly_speed * delta * 1.0
+		
+		if Input.is_action_pressed("fly_down"):
+			velocity.y -= fly_speed * delta * 1.0
 		
 	if FreeCamToggle:
 		handle_free_cam()
-		velocity.y -= gravity * delta
+		#velocity.y -= gravity * delta
 	else:
 		handle_camera_position(delta)
-		
-	
 
 
-func handle_camera_position(penis: float) -> void:
+func handle_camera_position(delta: float) -> void:
 	#global_position = lerp(global_position, character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y), penis * camera_speed)
 	var target = character_body_3d.global_position + (Drone_position).rotated(Vector3.UP, rotation.y)
 	var direction = global_position.direction_to(target)
 	#using move_towards for slow acceleration
-	velocity.x = lerp(velocity.x, direction.x * camera_speed, penis)
-	velocity.z = lerp(velocity.z, direction.z * camera_speed, penis)
-	velocity.y = lerp(velocity.y, direction.y * camera_speed / 2, penis)
+	velocity.x = lerp(velocity.x, direction.x * camera_speed, delta)
+	velocity.z = lerp(velocity.z, direction.z * camera_speed, delta)
+	velocity.y = lerp(velocity.y, direction.y * camera_speed / 2, delta)
 	move_and_slide()
 	## PHYSICSBODY3D AXIS LOCK LINEAR Y LATER
-
 		
 
 
