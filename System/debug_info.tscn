@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://yjcj1lpn4v8b"]
+
+[ext_resource type="Script" path="res://System/debug_info.gd" id="1_aqgr5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qilbu"]
+font_size = 30
+
+[node name="debug info" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqgr5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 22.0
+offset_right = 323.0
+offset_bottom = 206.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "FPS:"
+label_settings = SubResource("LabelSettings_qilbu")

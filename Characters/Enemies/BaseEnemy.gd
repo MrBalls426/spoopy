@@ -20,6 +20,8 @@ enum SearchBehavior {LOCATE,FOUND}
 @export var locate_player_check_interval := 1.0
 @export var lose_player_check_interval := 10.0
 @export var line_of_sight_required := true
+@export var max_rotation_speed_degrees := 30.0
+
 
 @export_category("Enemy Nodes")
 @export var nav_agent :NavigationAgent3D
@@ -79,8 +81,12 @@ func _physics_process(delta: float) -> void:
 				nav_agent.set_target_position(target.global_position) #player is targetted
 				var next_pos = nav_agent.get_next_path_position()
 				var direction = global_position.direction_to(next_pos)
-				
+				var y_axis_rotation = transform.basis.looking_at(next_pos,Vector3.UP).get_euler().y
+				print(transform.basis.looking_at(next_pos).get_euler())
+				print(transform.basis.get_euler())
 				#using move_towards for slow acceleration
+				transform = transform.in
+				
 				velocity.x = move_toward(velocity.x, direction.x * speed, delta)
 				velocity.z = move_toward(velocity.z, direction.z * speed, delta)
 	else: #cant find player
