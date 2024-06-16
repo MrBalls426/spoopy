@@ -22,7 +22,7 @@ var target # player
 
 # if found, line of sight temporarily not required 
 # play roar sound
-var found_player := false:
+@export var found_player := false:
 	set(val):
 		# if player has only just been found 
 		if val and not found_player:

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbombfx4asf5b"]
+[gd_scene load_steps=7 format=3 uid="uid://37ndfdpnvi4l"]
 
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="1_bp6qi"]
-[ext_resource type="PackedScene" uid="uid://dlyoekgnwfchn" path="res://assets/level.tscn" id="2_cnmca"]
 [ext_resource type="PackedScene" uid="uid://e3o6e27sio63" path="res://Characters/Enemies/stalker/stalker.tscn" id="4_04frb"]
-[ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="4_uwf0v"]
+[ext_resource type="PackedScene" uid="uid://buhocbwx54bbk" path="res://assets/Map/forest.tscn" id="4_n7dgk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhnqe"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -18,8 +17,12 @@ sky_material = SubResource("ProceduralSkyMaterial_fhnqe")
 background_mode = 2
 sky = SubResource("Sky_xpoou")
 tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.844902, 0.185712, 0.371193, 1)
+fog_light_energy = 1.1
+fog_density = 0.001
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0835
+volumetric_fog_density = 0.1
 volumetric_fog_albedo = Color(0.770819, 0.483127, 0.623215, 1)
 
 [node name="Node3D" type="Node3D"]
@@ -40,14 +43,15 @@ use_collision = true
 size = Vector3(35.2103, 0.243652, 44.4385)
 
 [node name="Character" parent="." instance=ExtResource("1_bp6qi")]
-transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, 1.72504, -3.1904)
-
-[node name="level" parent="." instance=ExtResource("2_cnmca")]
-
-[node name="Enemy2" parent="." instance=ExtResource("4_uwf0v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -1, 7)
+transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, -4.83841, -3.1904)
 
 [node name="Stalker" parent="." instance=ExtResource("4_04frb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5448, -2.3454, -8.81073)
-collision_layer = 2
-collision_mask = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -3.79289, 0)
+floor_max_angle = 0.785398
+max_target_locate_distance = 50
+max_target_distance = 200
+locate_player_check_interval = 1.0
+lose_player_check_interval = 10.0
+
+[node name="forest" parent="." instance=ExtResource("4_n7dgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -28, -195)

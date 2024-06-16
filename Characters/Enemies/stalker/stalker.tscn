@@ -1,10 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://e3o6e27sio63"]
+[gd_scene load_steps=9 format=3 uid="uid://e3o6e27sio63"]
 
 [ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="1_3fevq"]
 [ext_resource type="Script" path="res://Characters/Enemies/stalker/Stalker.gd" id="2_b1qac"]
 [ext_resource type="AudioStream" uid="uid://dctmcvwldci2i" path="res://assets/sounds/monster/monster_sound1.ogg" id="3_h4fjp"]
 [ext_resource type="AudioStream" uid="uid://1rci1lnrx826" path="res://assets/sounds/monster/monster_sound2.ogg" id="4_dkyfs"]
 [ext_resource type="AudioStream" uid="uid://bjc4vnbvlja1a" path="res://assets/sounds/monster/monster_sound3.ogg" id="5_3syh6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vqs5"]
+albedo_color = Color(0.6, 0.162, 0.2788, 1)
+roughness = 0.49
+emission = Color(0.168627, 0, 0, 1)
+emission_energy_multiplier = 1.85
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dttb1"]
+material = SubResource("StandardMaterial3D_4vqs5")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ham5t"]
 playback_mode = 1
@@ -20,12 +29,30 @@ stream_2/weight = 1.0
 
 [node name="Stalker" node_paths=PackedStringArray("roar") instance=ExtResource("1_3fevq")]
 script = ExtResource("2_b1qac")
+speed = 4.0
 roar = NodePath("Roar")
+found_player = false
+
+[node name="RayCast3D" parent="." index="2"]
+collision_mask = 2
+
+[node name="MeshInstance3D" parent="." index="3"]
+mesh = SubResource("CapsuleMesh_dttb1")
 
 [node name="Roar" type="AudioStreamPlayer3D" parent="." index="5"]
 stream = SubResource("AudioStreamRandomizer_ham5t")
 unit_size = 10.55
 max_distance = 300.0
 max_polyphony = 2
+panning_strength = 0.55
 bus = &"Roar"
 doppler_tracking = 2
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994133, -0.570747)
+light_color = Color(0.914285, 0, 0.134125, 1)
+light_energy = 3.352
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 16.0
+spot_range = 11.0
+spot_angle = 7.6457

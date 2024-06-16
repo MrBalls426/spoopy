@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmgd754ycx20d"]
+[gd_scene load_steps=5 format=3 uid="uid://cmgd754ycx20d"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_11vcj"]
 
@@ -6,12 +6,21 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pm6rk"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_syefo"]
+
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast", "timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 8
 collision_mask = 15
+floor_max_angle = 1.22173
 script = ExtResource("1_11vcj")
+speed = null
+max_target_locate_distance = null
+max_target_distance = null
+locate_player_check_interval = null
+lose_player_check_interval = null
 line_of_sight_required = false
+max_rotation_speed_degrees = null
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
 timer = NodePath("player_detection_timer")
@@ -32,6 +41,11 @@ debug_shape_custom_color = Color(0.672457, 0.672457, 0.672457, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_pm6rk")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.363341, 0, 0, 0, 0.363341, 0, 0, 0, 0.363341, 0, 0.369206, 0.372874)
+mesh = SubResource("BoxMesh_syefo")
+skeleton = NodePath("../..")
 
 [node name="player_detection_timer" type="Timer" parent="."]
 autostart = true
