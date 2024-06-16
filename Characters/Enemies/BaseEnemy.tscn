@@ -7,6 +7,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pm6rk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_syefo"]
+size = Vector3(0.1, 0.5, 0.8)
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast", "timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -14,13 +15,8 @@ collision_layer = 8
 collision_mask = 15
 floor_max_angle = 1.22173
 script = ExtResource("1_11vcj")
-speed = null
-max_target_locate_distance = null
-max_target_distance = null
-locate_player_check_interval = null
-lose_player_check_interval = null
 line_of_sight_required = false
-max_rotation_speed_degrees = null
+max_rotation_speed_degrees = 3.0
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
 timer = NodePath("player_detection_timer")
@@ -43,7 +39,7 @@ mesh = SubResource("CapsuleMesh_pm6rk")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.363341, 0, 0, 0, 0.363341, 0, 0, 0, 0.363341, 0, 0.369206, 0.372874)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369206, -0.407332)
 mesh = SubResource("BoxMesh_syefo")
 skeleton = NodePath("../..")
 

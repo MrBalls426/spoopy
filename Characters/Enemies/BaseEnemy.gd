@@ -11,16 +11,19 @@ extends CharacterBody3D
 
 
 enum SearchBehavior {LOCATE,FOUND}
+@export_category("Behaviors")
+@export var line_of_sight_required := true		## is line of sight required to target player
+@export var wander_toggle := false				## Enemy will wander when not targetting player
+@export var turn_and_face_toggle := true 		## Enemy facing movement direction
+@export var within_range_required := true		## Line of sight required to target player
 
 @export_category("Enemy Data")
-@export var speed := 2.0
-@export var max_target_locate_distance := 50 ## max distance target can be found
-@export var max_target_distance := 200 ## max distance target can be followed
-## seconds until raycast is performed to check if mosnter has line of sight of player
-@export var locate_player_check_interval := 1.0
-@export var lose_player_check_interval := 10.0
-@export var line_of_sight_required := true
-@export var max_rotation_speed_degrees := 30.0
+@export var speed := 2.0	
+@export var rotation_speed := 8.0				## speed of enemy rotation 
+@export var max_target_location_range := 50		## max distance target can be found
+@export var max_target_distance := 200 			## max distance target can be followed after being found without being lost
+@export var locate_player_check_interval := 1.0 ## time interval between raycasts to discover player
+@export var lose_player_check_interval := 10.0	## time interval between raycasts to lose player if line of sight is lost
 
 
 @export_category("Enemy Nodes")
@@ -42,7 +45,7 @@ var found_player := false:
 func within_range(search, target_position:Vector3) -> bool:
 	match search: 
 		SearchBehavior.LOCATE:
-			if abs(abs(global_position) - abs(target_position)).length() <= max_target_locate_distance:
+			if abs(abs(global_position) - abs(target_position)).length() <= max_target_location_range:
 				return true
 		SearchBehavior.FOUND:
 			if abs(abs(global_position) - abs(target_position)).length() <= max_target_distance:
@@ -70,9 +73,13 @@ func within_line_of_sight(target) :
 			found_player = within_range(SearchBehavior.LOCATE,target.global_position)
 
 
+## rotates enemy to face movement direction
+func turn_amd_face(delta:float,next_pos:Vector3) -> void:
+	var y_axis_rotation = transform.looking_at(Vector3(next_pos.x,global_position.y,next_pos.z))
+	transform = transform.interpolate_with(y_axis_rotation,delta * rotation_speed)
+
 func _ready() -> void:
 	timer.wait_time = locate_player_check_interval
-
 
 func _physics_process(delta: float) -> void:
 	target = get_tree().get_first_node_in_group("Player")
@@ -81,12 +88,10 @@ func _physics_process(delta: float) -> void:
 				nav_agent.set_target_position(target.global_position) #player is targetted
 				var next_pos = nav_agent.get_next_path_position()
 				var direction = global_position.direction_to(next_pos)
-				var y_axis_rotation = transform.basis.looking_at(next_pos,Vector3.UP).get_euler().y
-				print(transform.basis.looking_at(next_pos).get_euler())
-				print(transform.basis.get_euler())
-				#using move_towards for slow acceleration
-				transform = transform.in
 				
+				turn_amd_face(delta,next_pos)
+				#using move_towards for slow acceleration
+			
 				velocity.x = move_toward(velocity.x, direction.x * speed, delta)
 				velocity.z = move_toward(velocity.z, direction.z * speed, delta)
 	else: #cant find player
