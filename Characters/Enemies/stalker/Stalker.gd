@@ -1,19 +1,6 @@
 extends CharacterBody3D
 
-enum SearchBehavior {LOCATE,FOUND}
 
-@export_category("Enemy Data")
-@export var speed := 2.0
-@export var max_target_locate_distance := 50 ## max distance target can be found
-@export var max_target_distance := 200 ## max distance target can be followed
-## seconds until raycast is performed to check if mosnter has line of sight of player
-@export var locate_player_check_interval := 1.0
-@export var lose_player_check_interval := 10.0
-
-@export_category("Enemy Nodes")
-@export var nav_agent :NavigationAgent3D
-@export var ray_cast : RayCast3D
-@export var timer : Timer
 @export var roar: AudioStreamPlayer3D 
 
 

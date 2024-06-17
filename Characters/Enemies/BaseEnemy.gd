@@ -144,7 +144,7 @@ func within_line_of_sight(check:Object) -> bool:
 
 
 ## rotates enemy to face movement direction
-func turn_amd_face(delta:float,next_pos:Vector3) -> void:
+func turn_and_face(delta:float,next_pos:Vector3) -> void:
 	var y_axis_rotation = transform.looking_at(Vector3(next_pos.x,global_position.y,next_pos.z))
 	transform = transform.interpolate_with(y_axis_rotation,delta * rotation_speed)
 
@@ -156,11 +156,11 @@ func _physics_process(delta: float) -> void:
 		target_finder(potential_targets)
 		
 	# movement towards target
-	if target and not movement_override: # if suitable target is found and movement is not overridden
+	if target and not movement_override and nav_agent: # if suitable target is found and movement is not overridden
 		nav_agent.set_target_position(target.global_position) # target is targetted
 		var next_pos = nav_agent.get_next_path_position()
 		var direction = global_position.direction_to(next_pos)
-		turn_amd_face(delta,next_pos)
+		turn_and_face(delta,next_pos)
 
 		#using move_towards for slow acceleration		
 		velocity.x = move_toward(velocity.x, direction.x * move_speed, delta)
@@ -174,7 +174,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = lerp(velocity.x,0.0,delta)
 			velocity.z = lerp(velocity.z,0.0,delta)
-		
+	elif turn_and_face_toggle and target:
+		turn_and_face(delta,target.global_position)
 	
 	
 	# apply gravity

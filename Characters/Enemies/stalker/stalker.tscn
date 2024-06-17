@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://e3o6e27sio63"]
 
 [ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="1_3fevq"]
-[ext_resource type="Script" path="res://Characters/Enemies/stalker/Stalker.gd" id="2_b1qac"]
+[ext_resource type="Script" path="res://Characters/Enemies/stalker/stalker.gd" id="2_ili2p"]
 [ext_resource type="AudioStream" uid="uid://dctmcvwldci2i" path="res://assets/sounds/monster/monster_sound1.ogg" id="3_h4fjp"]
 [ext_resource type="AudioStream" uid="uid://1rci1lnrx826" path="res://assets/sounds/monster/monster_sound2.ogg" id="4_dkyfs"]
 [ext_resource type="AudioStream" uid="uid://bjc4vnbvlja1a" path="res://assets/sounds/monster/monster_sound3.ogg" id="5_3syh6"]
@@ -27,15 +27,14 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("5_3syh6")
 stream_2/weight = 1.0
 
-[node name="Stalker" node_paths=PackedStringArray("timer", "roar") instance=ExtResource("1_3fevq")]
-script = ExtResource("2_b1qac")
-speed = 4.0
-max_target_locate_distance = 50
-locate_player_check_interval = 1.0
-lose_player_check_interval = 10.0
-timer = NodePath("player_lose_timer")
-roar = NodePath("Roar")
-found_player = false
+[node name="Stalker" instance=ExtResource("1_3fevq")]
+script = ExtResource("2_ili2p")
+speed = null
+max_target_locate_distance = null
+max_target_distance = null
+locate_player_check_interval = null
+lose_player_check_interval = null
+found_player = null
 
 [node name="RayCast3D" parent="." index="2"]
 collision_mask = 2
@@ -60,3 +59,12 @@ light_indirect_energy = 0.0
 light_volumetric_fog_energy = 16.0
 spot_range = 11.0
 spot_angle = 7.6457
+
+[node name="stalker_behavior" type="Node" parent="." index="7"]
+script = ExtResource("2_ili2p")
+speed = null
+max_target_locate_distance = null
+max_target_distance = null
+locate_player_check_interval = null
+lose_player_check_interval = null
+found_player = null
