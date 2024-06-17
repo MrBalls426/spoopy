@@ -27,10 +27,13 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("5_3syh6")
 stream_2/weight = 1.0
 
-[node name="Stalker" node_paths=PackedStringArray("roar") instance=ExtResource("1_3fevq")]
+[node name="Stalker" node_paths=PackedStringArray("timer", "roar") instance=ExtResource("1_3fevq")]
 script = ExtResource("2_b1qac")
 speed = 4.0
 max_target_locate_distance = 50
+locate_player_check_interval = 1.0
+lose_player_check_interval = 10.0
+timer = NodePath("player_lose_timer")
 roar = NodePath("Roar")
 found_player = false
 

@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tyqxd"]
 
-[node name="PlayerCharacter" type="CharacterBody3D" groups=["Targettable"]]
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter", "Targettable"]]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_oprgt")

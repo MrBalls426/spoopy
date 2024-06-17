@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 @export_category("Drone Data")
 @export var Drone_position: Vector3
 @export var camera_speed := 5.0
