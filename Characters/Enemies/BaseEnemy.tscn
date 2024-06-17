@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmgd754ycx20d"]
+[gd_scene load_steps=7 format=3 uid="uid://cmgd754ycx20d"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_11vcj"]
+[ext_resource type="PackedScene" uid="uid://v7t2k63ul0ao" path="res://Characters/Player/Drone/drone.tscn" id="2_2tqs7"]
+[ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="3_jjasj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ianu"]
 
@@ -16,7 +18,7 @@ collision_mask = 15
 floor_max_angle = 1.22173
 script = ExtResource("1_11vcj")
 line_of_sight_required = false
-max_rotation_speed_degrees = 3.0
+target_list = [ExtResource("2_2tqs7"), ExtResource("3_jjasj")]
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
 timer = NodePath("player_detection_timer")

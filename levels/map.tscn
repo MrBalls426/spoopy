@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://37ndfdpnvi4l"]
+[gd_scene load_steps=7 format=3 uid="uid://37ndfdpnvi4l"]
 
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="1_bp6qi"]
-[ext_resource type="PackedScene" uid="uid://e3o6e27sio63" path="res://Characters/Enemies/stalker/stalker.tscn" id="4_04frb"]
 [ext_resource type="PackedScene" uid="uid://buhocbwx54bbk" path="res://assets/Map/forest.tscn" id="4_n7dgk"]
 [ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="4_uwf0v"]
 
@@ -46,12 +45,8 @@ size = Vector3(35.2103, 0.243652, 44.4385)
 [node name="Character" parent="." instance=ExtResource("1_bp6qi")]
 transform = Transform3D(0.972138, 0, 0, 0, 0.972138, 0, 0, 0, 0.972138, 29.3108, -4.83841, -3.1904)
 
-[node name="Stalker" parent="." instance=ExtResource("4_04frb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -3.79289, 0)
-floor_max_angle = 0.785398
-
 [node name="forest" parent="." instance=ExtResource("4_n7dgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -28, -195)
 
 [node name="Enemy" parent="." instance=ExtResource("4_uwf0v")]
-max_rotation_speed_degrees = 30.0
+check_targets = true
