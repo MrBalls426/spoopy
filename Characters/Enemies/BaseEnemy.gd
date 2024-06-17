@@ -151,41 +151,39 @@ func turn_and_face(delta:float,next_pos:Vector3) -> void:
 
 func _physics_process(delta: float) -> void: 
 	var potential_targets = get_targets() 	# Targettable entities within target list ordered by distance
-	
 	if potential_targets and detection_enabled: # if targets exist, and detection enabled
 		target_finder(potential_targets)
 		
 	# movement towards target
-	if target and not movement_override and nav_agent: # if suitable target is found and movement is not overridden
-		nav_agent.set_target_position(target.global_position) # target is targetted
-		var next_pos = nav_agent.get_next_path_position()
-		var direction = global_position.direction_to(next_pos)
-		turn_and_face(delta,next_pos)
+	if nav_agent: # if nav agent exists movement code will execute
+		if target and not movement_override: # if suitable target is found and movement is not overridden
+			nav_agent.set_target_position(target.global_position) # target is targetted
+			var next_pos = nav_agent.get_next_path_position()
+			var direction = global_position.direction_to(next_pos)
+			turn_and_face(delta,next_pos)
 
-		#using move_towards for slow acceleration		
-		velocity.x = move_toward(velocity.x, direction.x * move_speed, delta)
-		velocity.z = move_toward(velocity.z, direction.z * move_speed, delta)
+			#using move_towards for slow acceleration		
+			velocity.x = move_toward(velocity.x, direction.x * move_speed, delta)
+			velocity.z = move_toward(velocity.z, direction.z * move_speed, delta)
+			
+			
+		elif not movement_override: # no suitable target found and movement is not overridden
+			#using lerp for faster deceleration
+			if wander_toggle:
+				wander()
+			else:
+				velocity.x = lerp(velocity.x,0.0,delta)
+				velocity.z = lerp(velocity.z,0.0,delta)		
+		# required to send velocity in this func for nav agent to handle properly
+		nav_agent.set_velocity(velocity)
+		move_and_slide()
 		
-		
-	elif not movement_override: # no suitable target found and movement is not overridden
-		#using lerp for faster deceleration
-		if wander_toggle:
-			wander()
-		else:
-			velocity.x = lerp(velocity.x,0.0,delta)
-			velocity.z = lerp(velocity.z,0.0,delta)
-	elif turn_and_face_toggle and target:
+	elif turn_and_face_toggle and target: # if no nav agent, default to just doing turn and face behavior
 		turn_and_face(delta,target.global_position)
-	
-	
+		
 	# apply gravity
 	velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
 	
-	# required to send velocity in this func for nav agent to handle properly
-	if nav_agent:
-		nav_agent.set_velocity(velocity)
-		move_and_slide()
-
 
 
 
