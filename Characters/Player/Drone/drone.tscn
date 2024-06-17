@@ -24,3 +24,13 @@ mesh = SubResource("BoxMesh_1twuw")
 transform = Transform3D(-1, 1.84478e-08, -8.54542e-08, 0, 0.977482, 0.211018, 8.74228e-08, 0.211018, -0.977482, 0, 0, 0)
 current = true
 fov = 90.0
+
+[node name="DroneLight" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, -2.2478e-15, -2.84217e-14, -5.32907e-15, 0.977482, -0.211018, 4.26326e-14, 0.211018, 0.977482, 0, 0, 0)
+light_energy = 3.5
+light_volumetric_fog_energy = 0.1
+light_specular = 2.0
+spot_range = 18.0
+spot_attenuation = 0.5
+spot_angle = 41.8651
+spot_angle_attenuation = 0.5
