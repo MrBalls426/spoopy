@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnwbftichhro5"]
+
+[ext_resource type="Script" path="res://Gadgets/turret_base.gd" id="1_2sww0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1lthf"]
+
+[node name="TurretBase" type="Node3D" groups=["Targettable", "Turret_base"]]
+script = ExtResource("1_2sww0")
+
+[node name="Body" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+shape = SubResource("CylinderShape3D_1lthf")
+
+[node name="Barrel" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -0.005)
+size = Vector3(0.378418, 0.221191, 0.288086)
