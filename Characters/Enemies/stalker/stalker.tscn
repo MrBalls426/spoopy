@@ -29,9 +29,9 @@ stream_2/weight = 1.0
 
 [node name="Stalker" instance=ExtResource("1_3fevq")]
 script = ExtResource("2_ili2p")
+max_target_distance = null
 speed = null
 max_target_locate_distance = null
-max_target_distance = null
 locate_player_check_interval = null
 lose_player_check_interval = null
 found_player = null

@@ -182,8 +182,9 @@ func _physics_process(delta: float) -> void:
 	velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
 	
 	# required to send velocity in this func for nav agent to handle properly
-	nav_agent.set_velocity(velocity)
-	move_and_slide()
+	if nav_agent:
+		nav_agent.set_velocity(velocity)
+		move_and_slide()
 
 
 
