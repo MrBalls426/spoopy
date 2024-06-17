@@ -46,9 +46,9 @@ func within_range(search, target_position:Vector3) -> bool:
 	
 ## checks if target is visible from raycast
 func within_line_of_sight(target) :
-	ray_cast.target_position = target.global_position- ray_cast.global_position
+	ray_cast.target_position = target.global_position  - ray_cast.global_position
 	if ray_cast.is_colliding():
-		if ray_cast.get_collider().is_in_group("Player") and within_range(SearchBehavior.LOCATE,target.global_position) :
+		if ray_cast.get_collider().is_in_group("PlayerCharacter") and within_range(SearchBehavior.LOCATE,target.global_position) :
 			found_player = true
 			timer.wait_time = lose_player_check_interval
 		else:
@@ -77,7 +77,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	target = get_tree().get_first_node_in_group("Player")
+	target = get_tree().get_first_node_in_group("PlayerCharacter")
 	if target: # if player exists
 		if found_player: # if player within range and player spotted
 				nav_agent.set_target_position(target.global_position) #player is targetted
@@ -104,8 +104,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-## checks every second if player is spotted. If player spotted, wait 10 secs before checking if line of sight is broken
-func _on_player_detection_timer_timeout() -> void:
+
+
+func _on_player_lose_timer_timeout() -> void:
 	within_line_of_sight(target)
 	try_roar()
 	timer.start()
+

@@ -5,11 +5,14 @@ uniform sampler2D color_noise;
 uniform sampler2D color_sweep;
 
 void fragment() {
-	vec4 noise_grain = texture(base_noise, UV * 5.0);
+	float grass_multiplier = 10.0;
+	float color_sweep_multiplier = .2;
+	vec2 grass_sway = vec2(UV.x * grass_multiplier + sin(TIME)/360., UV.y * grass_multiplier + sin(TIME+ 90.)/360.);
+	vec4 noise_grain = texture(base_noise, grass_sway);
 	vec4 noise_color = texture(color_noise,UV);
-	vec4 sweep_color = texture(color_sweep,UV + TIME / 5.);
+	vec4 sweep_color = texture(color_sweep,UV + TIME / 8.);
 	
-	ALBEDO = noise_grain.rgb * mix(noise_color.rgb,sweep_color.rgb, 0.1);
+	ALBEDO = noise_grain.rgb * mix(noise_color.rgb,sweep_color.rgb, color_sweep_multiplier);
 }
 
 //void light() {
