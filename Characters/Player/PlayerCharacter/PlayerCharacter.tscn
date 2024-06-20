@@ -1,16 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq8r0gudh5cup"]
+[gd_scene load_steps=7 format=3 uid="uid://dq8r0gudh5cup"]
 
 [ext_resource type="Script" path="res://Characters/Player/PlayerCharacter/PlayerCharacter.gd" id="1_oprgt"]
 [ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/health.tscn" id="2_xnays"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ui56f"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_566gr"]
+material = SubResource("StandardMaterial3D_ui56f")
+size = Vector3(0.705, 0.19, 0.225)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mvm66"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tyqxd"]
 
-[node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter", "Targettable"]]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("player_camera") groups=["PlayerCharacter", "Targettable"]]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_oprgt")
+player_camera = NodePath("PlayerCamera")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.440163, 0.14354)
+cull_mask = 1048573
+
+[node name="Visor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461032, 0.478411)
+layers = 2
+mesh = SubResource("BoxMesh_566gr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_mvm66")

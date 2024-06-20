@@ -6,6 +6,8 @@ var mouse_motion := Vector2.ZERO
 @export var jump_height := 1.5
 @export var fall_multiplier := 2.3
 @export var FreeCamToggle := false
+@export var sprint_speed := 2.0
+@export var player_camera: Camera3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -35,19 +37,22 @@ func _physics_process(delta: float) -> void:
 			velocity.y -= gravity * delta
 		else:
 			velocity.y -= gravity * delta * fall_multiplier
-
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	if !Input.is_action_pressed("sprint") or not is_on_floor():
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not FreeCamToggle:
 		velocity.y = sqrt(jump_height * 2.0 * gravity)
+		
+	if Input.is_action_pressed("sprint") and is_on_floor() and not FreeCamToggle:
+		velocity.x = direction.x * SPEED * sprint_speed
+		velocity.z = direction.z * SPEED * sprint_speed
 
 	move_and_slide()
-
 
 
 

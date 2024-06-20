@@ -17,6 +17,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var player_character: CharacterBody3D 
 @export var camera: Node3D
 @export var drone_light: SpotLight3D
+@onready var drone_camera: Camera3D = $DroneCamera
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -32,7 +33,7 @@ func _input(event: InputEvent) -> void:
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
 	camera.rotate_x(-mouse_motion.y)
-	camera.rotation_degrees.x = clampf(camera.rotation_degrees.x, -90.0, 90.0)
+	camera.rotation_degrees.x = clampf(camera.rotation_degrees.x, -75.0, 75.0)
 	mouse_motion = Vector2.ZERO
 
 func handle_free_cam(delta: float) -> void:
@@ -64,9 +65,15 @@ func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
 	if free_cam_toggle:
 		velocity.y += Input.get_axis("fly_down", "fly_up") * camera_speed * delta
-	
-		if Input.get_axis("fly_down", "fly_up") == 0:
-			velocity.y = lerp(velocity.y, 0.0, delta)
+
+	if Input.is_action_just_pressed("toggle_perspective"):
+		if drone_camera.is_current():
+			drone_camera.clear_current(true)
+		else:
+			player_character.player_camera.clear_current()
+
+	if Input.get_axis("fly_down", "fly_up") == 0:
+		velocity.y = lerp(velocity.y, 0.0, delta)
 	
 	#if Input.is_action_pressed("fly_up") and free_cam_toggle:
 		#velocity.y += gravity * delta * 2
@@ -78,7 +85,6 @@ func _physics_process(delta: float) -> void:
 		handle_free_cam(delta)
 	else:
 		handle_camera_position(delta)
-
 
 
 
