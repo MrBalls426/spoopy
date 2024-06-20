@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bh14wiqc3x0jk"
-path="res://.godot/imported/turret.gltf-b1a0e0afa662aef56906ceed13db3f36.scn"
+uid="uid://begmhdqkxv1cw"
+path="res://.godot/imported/OldMap.glb-a4ea152b7c719d257cfc57aee778e0bf.scn"
 
 [deps]
 
-source_file="res://assets/Gadgets/turret.gltf"
-dest_files=["res://.godot/imported/turret.gltf-b1a0e0afa662aef56906ceed13db3f36.scn"]
+source_file="res://Map/OldMap/OldMap.glb"
+dest_files=["res://.godot/imported/OldMap.glb-a4ea152b7c719d257cfc57aee778e0bf.scn"]
 
 [params]
 

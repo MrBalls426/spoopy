@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="spooky game"
-run/main_scene="res://levels/map.tscn"
+run/main_scene="res://Map/map.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,7 +23,7 @@ Startup="*res://System/startup.gd"
 
 window/size/mode=2
 window/size/initial_position_type=0
-window/size/initial_screen=2
+window/size/initial_screen=1
 
 [input]
 

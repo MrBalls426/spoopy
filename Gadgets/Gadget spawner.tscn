@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvco1akwa7b1h"]
 
 [ext_resource type="Script" path="res://Gadgets/Gadget spawner.gd" id="1_4yhw5"]
-[ext_resource type="PackedScene" uid="uid://bnwbftichhro5" path="res://Gadgets/turret_base.tscn" id="2_6cw6c"]
+[ext_resource type="PackedScene" uid="uid://bnwbftichhro5" path="res://Gadgets/Turret/turret_base.tscn" id="2_sxsde"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_a3p4t"]
 
@@ -10,7 +10,7 @@
 [node name="GadgetSpawner" type="RigidBody3D"]
 max_contacts_reported = 1
 script = ExtResource("1_4yhw5")
-Gadget = ExtResource("2_6cw6c")
+Gadget = ExtResource("2_sxsde")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_a3p4t")

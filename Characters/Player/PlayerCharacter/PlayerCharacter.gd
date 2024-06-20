@@ -9,6 +9,9 @@ var mouse_motion := Vector2.ZERO
 @export var fall_multiplier := 2.3
 @export var FreeCamToggle := false
 @export var sprint_speed := 2.0
+@export var input_enabled: bool 			## Input disabled when in third person, drone locked into current state
+
+@export_category("Nodes")
 @export var player_camera: Camera3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -26,6 +29,9 @@ func _input(event: InputEvent) -> void:
 		get_tree().get_first_node_in_group("gadget").add_child(throwgadget)
 		throwgadget.apply_impulse(Vector3(0.0, 5.0, 3.2).rotated(Vector3.UP, rotation.y), Vector3.ZERO)
 		throwgadget.global_position = global_position
+	
+	if event.is_action_pressed("toggle_perspective"):
+		input_enabled = !input_enabled
 
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
@@ -35,7 +41,7 @@ func handle_camera_rotation() -> void:
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
 	var input_dir : Vector2
-	if !FreeCamToggle:
+	if !FreeCamToggle and input_enabled: 
 		input_dir = Input.get_vector("forward", "back", "left", "right")
 	var direction := (transform.basis * Vector3(-input_dir.y, 0, -input_dir.x)).normalized()
 		
@@ -52,10 +58,10 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not FreeCamToggle:
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not FreeCamToggle and not input_enabled:
 		velocity.y = sqrt(jump_height * 2.0 * gravity)
 		
-	if Input.is_action_pressed("sprint") and is_on_floor() and not FreeCamToggle:
+	if Input.is_action_pressed("sprint") and is_on_floor() and not FreeCamToggle and not input_enabled:
 		velocity.x = direction.x * SPEED * sprint_speed
 		velocity.z = direction.z * SPEED * sprint_speed
 
