@@ -104,3 +104,7 @@ Drone_light={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Drone"
 3d_physics/layer_4="Enemy"
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://37ndfdpnvi4l"]
+[gd_scene load_steps=9 format=3 uid="uid://37ndfdpnvi4l"]
 
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="1_bp6qi"]
 [ext_resource type="PackedScene" uid="uid://bnwbftichhro5" path="res://Gadgets/turret_base.tscn" id="4_a42xn"]
 [ext_resource type="PackedScene" uid="uid://buhocbwx54bbk" path="res://assets/Map/forest.tscn" id="4_n7dgk"]
 [ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="4_uwf0v"]
+[ext_resource type="PackedScene" uid="uid://sk67spnsos7f" path="res://testing/addon_test.tscn" id="5_lca3x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhnqe"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -54,3 +55,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.013, -0.885782, 20.8199)
 
 [node name="TurretBase" parent="." instance=ExtResource("4_a42xn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.1858, -2.44869, 6.12559)
+
+[node name="AddonTest" parent="." instance=ExtResource("5_lca3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2879, 1.49899, 12.2767)

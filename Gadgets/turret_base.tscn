@@ -1,20 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnwbftichhro5"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_4glhg"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1lthf"]
+[ext_resource type="PackedScene" uid="uid://bh14wiqc3x0jk" path="res://assets/Gadgets/turret.gltf" id="2_3bn23"]
 
 [node name="TurretBase" type="CharacterBody3D" groups=["Targettable", "Turret_base"]]
 script = ExtResource("1_4glhg")
 movement_override = true
 move_speed = 0.0
 
-[node name="Body" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
-shape = SubResource("CylinderShape3D_1lthf")
-
-[node name="Barrel" type="CSGBox3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -0.005)
-size = Vector3(0.378418, 0.221191, 0.288086)
+[node name="turret" parent="." instance=ExtResource("2_3bn23")]
