@@ -7,6 +7,7 @@ var mouse_motion := Vector2.ZERO
 @export var fall_multiplier := 2.3
 @export var FreeCamToggle := false
 @export var sprint_speed := 2.0
+@export var player_camera: Camera3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -51,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED * sprint_speed
 		velocity.z = direction.z * SPEED * sprint_speed
 
-	print(true and false)
 	move_and_slide()
 
 

@@ -12,8 +12,8 @@ collision_mask = 15
 script = ExtResource("1_ykvub")
 Drone_position = Vector3(0, 2, -3)
 camera_speed = 10.0
-camera = NodePath("Camera3D")
-drone_light = NodePath("Camera3D/DroneLight")
+camera = NodePath("DroneCamera")
+drone_light = NodePath("DroneCamera/DroneLight")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cesb3")
@@ -21,12 +21,12 @@ shape = SubResource("BoxShape3D_cesb3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_1twuw")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="DroneCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 1.84478e-08, -8.54542e-08, 0, 0.977482, 0.211018, 8.74228e-08, 0.211018, -0.977482, 0, 0, 0)
 current = true
 fov = 90.0
 
-[node name="DroneLight" type="SpotLight3D" parent="Camera3D"]
+[node name="DroneLight" type="SpotLight3D" parent="DroneCamera"]
 transform = Transform3D(1, -2.2478e-15, -2.84217e-14, -5.32907e-15, 0.977482, -0.211018, 4.26326e-14, 0.211018, 0.977482, 0, 0, 0)
 light_energy = 3.5
 light_volumetric_fog_energy = 0.1
