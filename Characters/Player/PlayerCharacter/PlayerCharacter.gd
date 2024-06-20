@@ -2,6 +2,8 @@ extends CharacterBody3D
 const SPEED = 4.0
 var mouse_motion := Vector2.ZERO
 
+@export var Gadget: PackedScene
+
 @export_category("PlayerCharacter Data")
 @export var jump_height := 1.5
 @export var fall_multiplier := 2.3
@@ -18,7 +20,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			mouse_motion = -event.relative * 0.001
-
+			
+	if event.is_action_pressed("gadget"):
+		var throwgadget = Gadget.instantiate()
+		get_tree().get_first_node_in_group("gadget").add_child(throwgadget)
+		throwgadget.apply_impulse(Vector3(0.0, 5.0, 3.2).rotated(Vector3.UP, rotation.y), Vector3.ZERO)
+		throwgadget.global_position = global_position
 
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
