@@ -4,12 +4,10 @@ extends CharacterBody3D
 @export_category("Drone Data")
 @export var Drone_position: Vector3
 @export var camera_speed := 5.0
-@export var horizontalSensitivity : float = 0.002
-@export var verticalSensitivity : float = 0.002
+@export var camera_sensitivity := 0.002
 @export var fall_speed: float = 2.3
 @export var free_cam_toggle: bool
 
-var mouse_motion := Vector2.ZERO
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -22,7 +20,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			mouse_motion = -event.relative * 0.001
+			handle_camera_rotation(event.relative * camera_sensitivity)
 			
 	if event.is_action_pressed("FreeCam"):
 		free_cam_toggle = !free_cam_toggle
@@ -30,9 +28,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Drone_light"):
 		drone_light.visible = !drone_light.visible
 
-func handle_camera_rotation() -> void:
-	rotate_y(mouse_motion.x)
-	camera.rotate_x(-mouse_motion.y)
+func handle_camera_rotation(mouse_motion) -> void:
+	#basis = basis.rotated(basis.y,-mouse_motion.x)
+	camera.basis = camera.basis.rotated(basis.x,mouse_motion.y)
 	camera.rotation_degrees.x = clampf(camera.rotation_degrees.x, -75.0, 75.0)
 	mouse_motion = Vector2.ZERO
 
@@ -62,7 +60,6 @@ func handle_camera_position(delta: float) -> void:
 	## PHYSICSBODY3D AXIS LOCK LINEAR Y LATER
 	
 func _physics_process(delta: float) -> void:
-	handle_camera_rotation()
 	if free_cam_toggle:
 		velocity.y += Input.get_axis("fly_down", "fly_up") * camera_speed * delta
 
