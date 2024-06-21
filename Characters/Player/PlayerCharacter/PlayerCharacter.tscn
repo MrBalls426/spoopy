@@ -15,21 +15,25 @@ size = Vector3(0.705, 0.19, 0.225)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tyqxd"]
 
-[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("player_camera") groups=["PlayerCharacter", "Targettable"]]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("player_camera", "mesh_instance", "collision_shape") groups=["PlayerCharacter", "Targettable"]]
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_oprgt")
 Gadget = ExtResource("2_p766u")
+camera_height = 0.2
 player_camera = NodePath("PlayerCamera")
+mesh_instance = NodePath("MeshInstance3D")
+collision_shape = NodePath("CollisionShape3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.440163, 0.14354)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.144)
 cull_mask = 1048573
 
-[node name="Visor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461032, 0.478411)
+[node name="Visor" type="MeshInstance3D" parent="PlayerCamera"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.14551e-08, 0, -0.330191)
 layers = 2
 mesh = SubResource("BoxMesh_566gr")
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_mvm66")
