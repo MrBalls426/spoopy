@@ -25,6 +25,12 @@ window/size/mode=2
 window/size/initial_position_type=0
 window/size/initial_screen=1
 
+[importer_defaults]
+
+animation_library={
+"import_script/path": "res://addons/blender_godot_pipeline/GLTFImporter.gd"
+}
+
 [input]
 
 forward={

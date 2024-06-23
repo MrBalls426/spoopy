@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cc3nkdl4ka6ug"
+uid="uid://b1i621wi7vgf"
 path="res://.godot/imported/MapGround.gltf-739700c05fc5bc970c6302e71663aa99.scn"
 
 [deps]
@@ -28,7 +28,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-import_script/path=""
+import_script/path="res://addons/blender_godot_pipeline/GLTFImporter.gd"
 _subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

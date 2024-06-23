@@ -9,22 +9,20 @@
 			"extras":{
 				"other_props":{},
 				"GodotPipelineProps":{
+					"global_UI":1,
+					"path_UI":0,
 					"export_UI":1,
 					"save_path":"//..\\..\\..\\OneDrive\\Documents\\godot\\spooky\\Map\\MapGround\\MapGround.gltf",
 					"collision_UI":1,
-					"col_types":3,
-					"global_UI":0,
-					"path_UI":0,
-					"body_types":0,
-					"display_wire":0
+					"col_types":0,
+					"body_types":0
 				}
 			},
 			"name":"Scene",
 			"nodes":[
 				0,
 				1,
-				2,
-				3
+				2
 			]
 		}
 	],
@@ -34,78 +32,35 @@
 				"collision":"trimesh"
 			},
 			"mesh":0,
-			"name":"Plane",
+			"name":"land",
 			"scale":[
-				0.6000000238418579,
-				0.6000004410743713,
-				0.6000000238418579
-			],
-			"translation":[
-				-109.86985778808594,
-				6.046319007873535,
-				-87.84879302978516
+				625,
+				625,
+				625
 			]
 		},
 		{
 			"extras":{
-				"collision":"trimesh"
+				"collision":"box",
+				"size_x":"2.0304",
+				"size_z":"2.0108",
+				"size_y":"0.0634"
 			},
 			"mesh":1,
-			"name":"Cube",
+			"name":"water",
 			"scale":[
-				4.849205493927002,
-				4.849205493927002,
-				4.849205493927002
+				1000,
+				1000,
+				1000
 			],
 			"translation":[
-				-238.2089385986328,
-				20.667940139770508,
-				-175.9190673828125
+				15.212833404541016,
+				-4.507621765136719,
+				-5.394577980041504
 			]
 		},
 		{
-			"extras":{
-				"collision":"trimesh"
-			},
-			"mesh":2,
-			"name":"player sizeref",
-			"scale":[
-				0.5000002980232239,
-				1,
-				0.5000001788139343
-			],
-			"translation":[
-				-219.73971557617188,
-				25.59712028503418,
-				-175.6975860595703
-			]
-		},
-		{
-			"extras":{
-				"collision":"trimesh"
-			},
-			"mesh":3,
-			"name":"Plane.001",
-			"scale":[
-				325.4957275390625,
-				325.4957275390625,
-				325.4957275390625
-			],
-			"translation":[
-				-82.07877349853516,
-				12.092636108398438,
-				-55.86581802368164
-			]
-		}
-	],
-	"materials":[
-		{
-			"doubleSided":true,
-			"name":"Material.001",
-			"pbrMetallicRoughness":{
-				"metallicFactor":0.2688821852207184,
-				"roughnessFactor":0.7326284050941467
-			}
+			"name":"GPencil"
 		}
 	],
 	"meshes":[
@@ -115,37 +70,9 @@
 				{
 					"attributes":{
 						"POSITION":0,
-						"NORMAL":1,
-						"TEXCOORD_0":2
+						"NORMAL":1
 					},
-					"indices":3,
-					"material":0
-				}
-			]
-		},
-		{
-			"name":"Cube",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":4,
-						"NORMAL":5,
-						"TEXCOORD_0":6
-					},
-					"indices":7
-				}
-			]
-		},
-		{
-			"name":"Sphere",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":8,
-						"NORMAL":9,
-						"TEXCOORD_0":10
-					},
-					"indices":11
+					"indices":2
 				}
 			]
 		},
@@ -154,11 +81,11 @@
 			"primitives":[
 				{
 					"attributes":{
-						"POSITION":12,
-						"NORMAL":13,
-						"TEXCOORD_0":14
+						"POSITION":3,
+						"NORMAL":4,
+						"TEXCOORD_0":5
 					},
-					"indices":15
+					"indices":6
 				}
 			]
 		}
@@ -167,241 +94,113 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":6067,
+			"count":134142,
 			"max":[
-				260.9652099609375,
-				109.08430480957031,
-				264.27960205078125
+				1.04097318649292,
+				0.3128018379211426,
+				1.000057339668274
 			],
 			"min":[
-				-257.4677429199219,
-				-16.489002227783203,
-				-257.8980407714844
+				-1.0193578004837036,
+				-0.04163770750164986,
+				-1.015731930732727
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":6067,
+			"count":134142,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
-			"componentType":5126,
-			"count":6067,
-			"type":"VEC2"
+			"componentType":5125,
+			"count":136668,
+			"type":"SCALAR"
 		},
 		{
 			"bufferView":3,
-			"componentType":5123,
-			"count":34314,
-			"type":"SCALAR"
+			"componentType":5126,
+			"count":24,
+			"max":[
+				1.0152127742767334,
+				0.03168156370520592,
+				1.0053945779800415
+			],
+			"min":[
+				-1.0152127742767334,
+				-0.03168156370520592,
+				-1.0053945779800415
+			],
+			"type":"VEC3"
 		},
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":82,
-			"max":[
-				1,
-				1.477579116821289,
-				3.2549707889556885
-			],
-			"min":[
-				-1,
-				-1,
-				-1
-			],
+			"count":24,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":82,
-			"type":"VEC3"
+			"count":24,
+			"type":"VEC2"
 		},
 		{
 			"bufferView":6,
-			"componentType":5126,
-			"count":82,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":7,
 			"componentType":5123,
-			"count":168,
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":8,
-			"componentType":5126,
-			"count":1984,
-			"max":[
-				0.9999997019767761,
-				2.4532947540283203,
-				0.9999993443489075
-			],
-			"min":[
-				-0.9999990463256836,
-				0.4532947540283203,
-				-1
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":9,
-			"componentType":5126,
-			"count":1984,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":10,
-			"componentType":5126,
-			"count":1984,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":11,
-			"componentType":5123,
-			"count":2880,
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":12,
-			"componentType":5126,
-			"count":16,
-			"max":[
-				1.0144250392913818,
-				-0.05427364259958267,
-				0.9913521409034729
-			],
-			"min":[
-				-1.1680333614349365,
-				-0.05427364259958267,
-				-1.1911063194274902
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":13,
-			"componentType":5126,
-			"count":16,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":14,
-			"componentType":5126,
-			"count":16,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":15,
-			"componentType":5123,
-			"count":48,
+			"count":36,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":72804,
+			"byteLength":1609704,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":72804,
-			"byteOffset":72804,
+			"byteLength":1609704,
+			"byteOffset":1609704,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":48536,
-			"byteOffset":145608,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":68628,
-			"byteOffset":194144,
+			"byteLength":546672,
+			"byteOffset":3219408,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":984,
-			"byteOffset":262772,
+			"byteLength":288,
+			"byteOffset":3766080,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":984,
-			"byteOffset":263756,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":656,
-			"byteOffset":264740,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":336,
-			"byteOffset":265396,
-			"target":34963
-		},
-		{
-			"buffer":0,
-			"byteLength":23808,
-			"byteOffset":265732,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":23808,
-			"byteOffset":289540,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":15872,
-			"byteOffset":313348,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":5760,
-			"byteOffset":329220,
-			"target":34963
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":334980,
+			"byteLength":288,
+			"byteOffset":3766368,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":192,
-			"byteOffset":335172,
+			"byteOffset":3766656,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":128,
-			"byteOffset":335364,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":96,
-			"byteOffset":335492,
+			"byteLength":72,
+			"byteOffset":3766848,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":335588,
+			"byteLength":3766920,
 			"uri":"MapGround.bin"
 		}
 	]
