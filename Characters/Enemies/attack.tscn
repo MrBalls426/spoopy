@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://btd6uvvlsw4an"]
+
+[ext_resource type="Script" path="res://Characters/Enemies/attack.gd" id="1_pgyf2"]
+
+[sub_resource type="Animation" id="Animation_k4weh"]
+resource_name = "Attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_no8dh"]
+_data = {
+"Attack": SubResource("Animation_k4weh")
+}
+
+[node name="attack" type="RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.33977, -0.504757)
+script = ExtResource("1_pgyf2")
+enemy_damage = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_no8dh")
+}

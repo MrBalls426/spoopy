@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Characters/Player/PlayerCharacter/PlayerCharacter.gd" id="1_oprgt"]
 [ext_resource type="PackedScene" uid="uid://dvco1akwa7b1h" path="res://Gadgets/Gadget spawner.tscn" id="2_p766u"]
-[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/health.tscn" id="2_xnays"]
+[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/health_component.tscn" id="3_y6hmp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ui56f"]
 albedo_color = Color(0, 0, 0, 1)
@@ -55,4 +55,4 @@ light_indirect_energy = 16.0
 spot_range = 4.80594
 spot_angle = 30.4065
 
-[node name="health" parent="." instance=ExtResource("2_xnays")]
+[node name="health" parent="." instance=ExtResource("3_y6hmp")]

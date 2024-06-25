@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmgd754ycx20d"]
+[gd_scene load_steps=6 format=3 uid="uid://cmgd754ycx20d"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_11vcj"]
+[ext_resource type="PackedScene" uid="uid://btd6uvvlsw4an" path="res://Characters/Enemies/attack.tscn" id="2_p6lvy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ianu"]
 
@@ -45,4 +46,9 @@ skeleton = NodePath("../..")
 
 [node name="player_lose_timer" type="Timer" parent="."]
 
+[node name="attack" parent="." instance=ExtResource("2_p6lvy")]
+enemy_damage = 25.0
+
 [connection signal="timeout" from="player_lose_timer" to="." method="_on_player_lose_timer_timeout"]
+
+[editable path="attack"]
