@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6tmrqvgwl884"]
+
+[ext_resource type="Script" path="res://components/ai_behavior/scripts/DetectionRadius.gd" id="1_s0a4d"]
+
+[node name="radius_detection_component" type="Node"]
+script = ExtResource("1_s0a4d")

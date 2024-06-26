@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6pxlvwtmvuy"]
+
+[ext_resource type="Script" path="res://components/ai_behavior/scripts/DetectionRaycast.gd" id="1_oilab"]
+
+[node name="raycast_detection_component" type="Node"]
+script = ExtResource("1_oilab")

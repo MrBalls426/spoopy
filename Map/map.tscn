@@ -1,79 +1,88 @@
-[gd_scene load_steps=11 format=3 uid="uid://37ndfdpnvi4l"]
+[gd_scene load_steps=13 format=3 uid="uid://37ndfdpnvi4l"]
 
-[ext_resource type="PackedScene" uid="uid://i82m00idbene" path="res://Map/MapGround/MapGround.tscn" id="1_8l08a"]
+[ext_resource type="PackedScene" uid="uid://cujql4qjg5jek" path="res://Map/Terrain/Terrain.tscn" id="1_8l08a"]
 [ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="2_or3ku"]
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="3_kn6nt"]
-[ext_resource type="PackedScene" uid="uid://dvco1akwa7b1h" path="res://Gadgets/Gadget spawner.tscn" id="4_1n8xg"]
+[ext_resource type="PackedScene" uid="uid://dvco1akwa7b1h" path="res://components/ai_behavior/Gadgets/Gadget spawner.tscn" id="4_1n8xg"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhnqe"]
-sky_top_color = Color(0, 0, 0, 1)
-sky_horizon_color = Color(0.612347, 0.0922318, 0.115021, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.230758, 0.211677, 0.317151, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r4860"]
 
-[sub_resource type="Sky" id="Sky_xpoou"]
-sky_material = SubResource("ProceduralSkyMaterial_fhnqe")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q16yy"]
+seamless = true
+noise = SubResource("FastNoiseLite_r4860")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qa8el"]
+sky_top_color = Color(0.0041299, 0.00618146, 0.00986637, 1)
+sky_horizon_color = Color(0.170105, 0.158111, 0.298542, 1)
+sky_curve = 0.046168
+sky_energy_multiplier = 1.05
+sky_cover = SubResource("NoiseTexture2D_q16yy")
+sky_cover_modulate = Color(0.471931, 0.433206, 0.721653, 1)
+ground_bottom_color = Color(0.127678, 0.0786149, 0.0881348, 1)
+ground_horizon_color = Color(0.444582, 0.251247, 0.485425, 1)
+ground_curve = 0.00891452
+ground_energy_multiplier = 1.15
+
+[sub_resource type="Sky" id="Sky_xxos1"]
+sky_material = SubResource("ProceduralSkyMaterial_qa8el")
 
 [sub_resource type="Environment" id="Environment_lq7ny"]
 background_mode = 2
-sky = SubResource("Sky_xpoou")
+sky = SubResource("Sky_xxos1")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.15
 tonemap_mode = 2
 fog_enabled = true
-fog_light_energy = 1.1
-fog_density = 0.001
+fog_light_color = Color(0.754099, 0.684704, 0.758989, 1)
+fog_light_energy = 0.5
+fog_density = 0.075
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.0097
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission_energy = 0.1
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0ofg"]
-noise_type = 3
-frequency = 0.0275
-offset = Vector3(-1000, 0, 0)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q30k4"]
 
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_475vw"]
-width = 128
-height = 128
-depth = 128
-noise = SubResource("FastNoiseLite_m0ofg")
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_q7vdu"]
+width = 320
+height = 320
+depth = 320
+noise = SubResource("FastNoiseLite_q30k4")
 
-[sub_resource type="FogMaterial" id="FogMaterial_b01ct"]
-density = 2.0
-albedo = Color(0.35873, 0.349341, 0.400803, 1)
-emission = Color(0.293885, 0.253892, 0.39239, 1)
-height_falloff = 0.123413
-edge_fade = 0.570523
-density_texture = SubResource("NoiseTexture3D_475vw")
+[sub_resource type="FogMaterial" id="FogMaterial_shytw"]
+albedo = Color(0.4452, 0.452267, 0.53, 1)
+edge_fade = 0.443827
+density_texture = SubResource("NoiseTexture3D_q7vdu")
 
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lq7ny")
 
+[node name="FogVolume" type="FogVolume" parent="WorldEnvironment"]
+shape = 4
+material = SubResource("FogMaterial_shytw")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 5.03217, 0)
-light_color = Color(0.591887, 0.801903, 0.995014, 1)
-light_energy = 0.1
 light_volumetric_fog_energy = 3.51
 shadow_enabled = true
-
-[node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(1, 1.49012e-08, -7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, -1.19209e-07, -4.76837e-07, 2.38419e-07)
-shape = 4
-material = SubResource("FogMaterial_b01ct")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.053, 0.300828, -406.154)
 use_collision = true
 size = Vector3(35.2103, 0.243652, 44.4385)
 
-[node name="MapGround" parent="." instance=ExtResource("1_8l08a")]
+[node name="Terrain" parent="." instance=ExtResource("1_8l08a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -408.53, -97.0052, -386.049)
 
 [node name="Enemy" parent="." instance=ExtResource("2_or3ku")]
-transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -198.477, -14.1442, -329.249)
+transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -192.801, 25.1493, -260.537)
 
 [node name="Player" parent="." instance=ExtResource("3_kn6nt")]
-transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -194.199, -13.1292, -335.275)
+transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -188.523, 26.1643, -266.563)
 
 [node name="RigidBody3D" parent="." instance=ExtResource("4_1n8xg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.019, 8.04412, -334.018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.343, 47.3376, -265.306)
 
 [node name="GadgetContainer" type="Node3D" parent="." groups=["gadget"]]

@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmgd754ycx20d"]
+[gd_scene load_steps=10 format=3 uid="uid://cmgd754ycx20d"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_11vcj"]
+[ext_resource type="Script" path="res://Characters/Enemies/Validator.gd" id="2_gxx5p"]
+[ext_resource type="PackedScene" uid="uid://6tmrqvgwl884" path="res://components/ai_behavior/radius_detection_component.tscn" id="3_uy6m0"]
+[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/ai_behavior/health_component.tscn" id="4_s8del"]
+[ext_resource type="PackedScene" uid="uid://busyvre4qrc7p" path="res://components/ai_behavior/movement_component.tscn" id="5_glttc"]
+[ext_resource type="PackedScene" uid="uid://bvoyrmrr076ab" path="res://components/ai_behavior/facing_component.tscn" id="6_qws0d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ianu"]
 
@@ -15,10 +20,28 @@ collision_layer = 8
 collision_mask = 15
 floor_max_angle = 1.39626
 script = ExtResource("1_11vcj")
+detection_enabled = null
+within_range_required = null
+line_of_sight_required = null
+wander_toggle = null
+turn_and_face_toggle = null
+movement_override = null
+move_speed = null
+rotation_speed = null
 target_list = ["Drone", "PlayerCharacter"]
+max_target_location_range = null
+max_target_distance = null
+lose_player_timer_duration = null
+wander_strength = null
+wander_region_toggle = null
+max_wander_distance = null
+wander_angle_toggle = null
+wander_angle = null
+wander_interval = null
+wander_interval_randomization = null
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
-lose_timer = NodePath("player_lose_timer")
+lose_timer = NodePath("")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
@@ -43,6 +66,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369206, -0.407332)
 mesh = SubResource("BoxMesh_syefo")
 skeleton = NodePath("../..")
 
-[node name="player_lose_timer" type="Timer" parent="."]
+[node name="ComponentValidator" type="Node" parent="."]
+script = ExtResource("2_gxx5p")
 
-[connection signal="timeout" from="player_lose_timer" to="." method="_on_player_lose_timer_timeout"]
+[node name="facing_component" parent="." instance=ExtResource("6_qws0d")]
+
+[node name="health_component" parent="." instance=ExtResource("4_s8del")]
+
+[node name="radius_detection_component" parent="." instance=ExtResource("3_uy6m0")]
+
+[node name="movement_component2" parent="." instance=ExtResource("5_glttc")]
+
+[node name="movement_component" parent="." instance=ExtResource("5_glttc")]

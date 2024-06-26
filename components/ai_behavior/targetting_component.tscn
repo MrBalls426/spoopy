@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsjksr4ilhvxw"]
+
+[ext_resource type="Script" path="res://components/ai_behavior/scripts/Targetting.gd" id="1_rdjbg"]
+
+[node name="targetting_component" type="Node"]
+script = ExtResource("1_rdjbg")
