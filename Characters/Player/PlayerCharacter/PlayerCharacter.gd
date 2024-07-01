@@ -1,10 +1,14 @@
 extends CharacterBody3D
+class_name Protag
+
 const SPEED = 4.0
 var mouse_motion := Vector2.ZERO
 
 @export var Gadget: PackedScene
 
 @export_category("PlayerCharacter Data")
+@export var max_health := 100
+@export var current_health = max_health
 @export var jump_height := 1.5
 @export var fall_multiplier := 2.3
 @export var ReconToggle := false
