@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var camera_speed := 5.0				## camera move speed
 @export var camera_sensitivity := 0.002		
 @export var recon_toggle: bool			## toggles freecam behavior
+@export var fnaf_mode = false
 
 @export_category("Nodes")
 @export var player_character: CharacterBody3D 
@@ -23,17 +24,22 @@ func _input(event: InputEvent) -> void:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			handle_drone_rotation(event.relative * camera_sensitivity)
 				
-		if event.is_action_pressed("FreeCam"):
-			recon_toggle = !recon_toggle
+	if event.is_action_pressed("FreeCam"):
+		recon_toggle = !recon_toggle
 
 	if event.is_action_pressed("Drone_light"):
 		drone_light.visible = !drone_light.visible
 		
 	if event.is_action_pressed("toggle_perspective"):
 		if drone_camera.is_current():
-			drone_camera.clear_current(true)
+			drone_camera.clear_current()
+			player_character.player_camera.set_current(true)
 		else:
 			player_character.player_camera.clear_current()
+			drone_camera.set_current(true)
+	
+	if event.is_action_pressed("fnaf mode") and recon_toggle:
+		fnaf_mode = !fnaf_mode
 
 ## ROTATES CAMERA, ROTATION.x CLAMPED TO PREVENT CAMERA WRAPPING
 func handle_drone_rotation(mouse_motion) -> void:
@@ -88,10 +94,11 @@ func handle_drone_position(delta: float) -> void:
 	
 func _physics_process(delta: float) -> void:
 	# if in freecam  mode
-	if recon_toggle:
-		handle_free_cam(delta)
-	else:
-		handle_drone_position(delta)
+	if not fnaf_mode:
+		if recon_toggle:
+			handle_free_cam(delta)
+		else:
+			handle_drone_position(delta)
 
 
 

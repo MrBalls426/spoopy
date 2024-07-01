@@ -39,9 +39,9 @@ wander_angle_toggle = null
 wander_angle = null
 wander_interval = null
 wander_interval_randomization = null
+lose_timer = null
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
-lose_timer = null
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
