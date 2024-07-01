@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://37ndfdpnvi4l"]
+[gd_scene load_steps=12 format=3 uid="uid://37ndfdpnvi4l"]
 
 [ext_resource type="PackedScene" uid="uid://cujql4qjg5jek" path="res://Map/Terrain/Terrain.tscn" id="1_8l08a"]
-[ext_resource type="PackedScene" uid="uid://cmgd754ycx20d" path="res://Characters/Enemies/BaseEnemy.tscn" id="2_or3ku"]
 [ext_resource type="PackedScene" uid="uid://7ofka1mj2b16" path="res://Characters/Player/Player.tscn" id="3_kn6nt"]
 [ext_resource type="PackedScene" uid="uid://dvco1akwa7b1h" path="res://components/ai_behavior/Gadgets/Gadget spawner.tscn" id="4_1n8xg"]
 
@@ -75,9 +74,6 @@ size = Vector3(35.2103, 0.243652, 44.4385)
 
 [node name="Terrain" parent="." instance=ExtResource("1_8l08a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -408.53, -97.0052, -386.049)
-
-[node name="Enemy" parent="." instance=ExtResource("2_or3ku")]
-transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -192.801, 25.1493, -260.537)
 
 [node name="Player" parent="." instance=ExtResource("3_kn6nt")]
 transform = Transform3D(0.999987, -0.00504398, 0, 0.00504398, 0.999987, 0, 0, 0, 1, -188.523, 26.1643, -266.563)

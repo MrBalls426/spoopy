@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Characters/Enemies/BaseEnemy.gd" id="1_11vcj"]
 [ext_resource type="Script" path="res://Characters/Enemies/Validator.gd" id="2_gxx5p"]
 [ext_resource type="PackedScene" uid="uid://6tmrqvgwl884" path="res://components/ai_behavior/radius_detection_component.tscn" id="3_uy6m0"]
-[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/ai_behavior/health_component.tscn" id="4_s8del"]
+[ext_resource type="PackedScene" uid="uid://lx84oy6r0glj" path="res://components/health_component.tscn" id="4_s8del"]
 [ext_resource type="PackedScene" uid="uid://busyvre4qrc7p" path="res://components/ai_behavior/movement_component.tscn" id="5_glttc"]
 [ext_resource type="PackedScene" uid="uid://bvoyrmrr076ab" path="res://components/ai_behavior/facing_component.tscn" id="6_qws0d"]
 
@@ -14,7 +14,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_syefo"]
 size = Vector3(0.1, 0.5, 0.8)
 
-[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast", "lose_timer") groups=["BaseEnemy", "Targettable"]]
+[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "ray_cast") groups=["BaseEnemy", "Targettable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 8
 collision_mask = 15
@@ -41,7 +41,7 @@ wander_interval = null
 wander_interval_randomization = null
 nav_agent = NodePath("NavigationAgent3D")
 ray_cast = NodePath("RayCast3D")
-lose_timer = NodePath("")
+lose_timer = null
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
