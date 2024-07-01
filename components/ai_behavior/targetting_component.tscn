@@ -4,3 +4,6 @@
 
 [node name="targetting_component" type="Node"]
 script = ExtResource("1_rdjbg")
+
+[node name="player_lose_timer" type="Timer" parent="."]
+one_shot = true
